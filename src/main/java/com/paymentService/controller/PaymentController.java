@@ -14,7 +14,8 @@ import java.util.UUID;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
+import com.paymentService.dto.request.BankTransferRequest;
+import com.paymentService.dto.response.BankTransferResponse;
 
 @RestController
 @RequestMapping("/api/payment")
@@ -59,6 +60,23 @@ public class PaymentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
+    /**
+     * Processes a bank transfer request
+     * 
+     * @param request The bank transfer request containing transfer details
+     * @return ResponseEntity containing the bank transfer response if successful,
+     *         or an error status if the transfer processing fails
+     */
+    @PostMapping("/bank-transfer")
+    public ResponseEntity<BankTransferResponse> processBankTransfer(@RequestBody BankTransferRequest request) {
+        try {
+            BankTransferResponse response = paymentService.processBankTransfer(request);
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 }

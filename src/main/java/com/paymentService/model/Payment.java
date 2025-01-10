@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import lombok.Data;
 import java.util.UUID;
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -19,13 +20,31 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private UUID customerId;
 
-    private LocalDateTime createdAt;
+    @Column(nullable = true)
+    private String accountNumber;
 
+    @Column(nullable = true) 
+    private String routingNumber;
+
+    @Column(nullable = true)
+    private String accountHolderName;
+
+    @Column(nullable = true)
+    private BigDecimal amount;
+
+    @Column(nullable = true)
+    private String currency;
+
+    @Column(nullable = true)
+    private String transferStatus;
+
+    @Column(nullable = true)
+    private String description;
+
+    private LocalDateTime createdAt;
     
     private LocalDateTime updatedAt;
-
-  
 }

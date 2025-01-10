@@ -28,15 +28,27 @@ public class Transaction {
     private UUID paymentId;
 
     @Column(nullable = false)
-    private BigDecimal amount; 
+    private BigDecimal amount;
 
-    
-    private String status; 
+    @Column(nullable = false)
+    private String currency;
+
+    @Column(nullable = false)
+    private String accountNumber;
+
+    @Column(nullable = false)
+    private String routingNumber;
+
+    @Column(nullable = false)
+    private String accountHolderName;
+
+    @Column(nullable = false)
+    private String status;
+
+    @Column(nullable = true)
+    private String description;
 
     private LocalDateTime createdAt;
 
-    
     private LocalDateTime updatedAt;
-
-   
 }
